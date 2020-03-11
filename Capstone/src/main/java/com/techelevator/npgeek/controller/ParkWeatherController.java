@@ -4,6 +4,8 @@ package com.techelevator.npgeek.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.techelevator.npgeek.model.Park;
 import com.techelevator.npgeek.model.ParkDao;
+import com.techelevator.npgeek.model.Weather;
 
 @Controller
 public class ParkWeatherController {
@@ -27,9 +30,20 @@ public class ParkWeatherController {
 	}
 	
 	@GetMapping("/detail")
-	public String displayDetailPage(@RequestParam String code, ModelMap modelMap) {
+	public String displayDetailPage(@RequestParam String code, @RequestParam(required = false) String celsius, ModelMap modelMap, HttpSession session) {
 		Park park = parkDao.getParkByCode(code);
+		List<Weather> parkWeather= parkDao.getAllWeatherByPark(code);
 		modelMap.put("park", park);
+		if (celsius !=null) {
+			session.setAttribute("celsius", celsius);
+			if (celsius.equals("t")) {
+				for (Weather w: parkWeather) {
+					w.convertToCelsius();
+				}
+			
+			}
+		}
+		modelMap.put("weathers", parkWeather);
 		return "detail";
 	}
 	

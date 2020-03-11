@@ -8,11 +8,11 @@ public class Park {
 	private String state;
 	private long acreage;
 	private long elevationInFeet;
-	private double milesOfTrails;
+	private float milesOfTrail;
 	private long numberOfCampsites;
 	private String climate;
 	private int yearFounded;
-	private long annualVistors;
+	private long annualVisitors;
 	private String inspirationalQuote;
 	private String inspQuoteSource;
 	private String description;
@@ -54,11 +54,11 @@ public class Park {
 	public void setElevationInFeet(long elevationInFeet) {
 		this.elevationInFeet = elevationInFeet;
 	}
-	public double getMilesOfTrails() {
-		return milesOfTrails;
+	public double getMilesOfTrail() {
+		return milesOfTrail;
 	}
-	public void setMilesOfTrails(double milesOfTrails) {
-		this.milesOfTrails = milesOfTrails;
+	public void setMilesOfTrail(float milesOfTrail) {
+		this.milesOfTrail = milesOfTrail;
 	}
 	public long getNumberOfCampsites() {
 		return numberOfCampsites;
@@ -78,11 +78,11 @@ public class Park {
 	public void setYearFounded(int yearFounded) {
 		this.yearFounded = yearFounded;
 	}
-	public long getAnnualVistors() {
-		return annualVistors;
+	public long getAnnualVisitors() {
+		return annualVisitors;
 	}
-	public void setAnnualVistors(long annualVistors) {
-		this.annualVistors = annualVistors;
+	public void setAnnualVisitors(long annualVisitors) {
+		this.annualVisitors = annualVisitors;
 	}
 	public String getInspirationalQuote() {
 		return inspirationalQuote;
