@@ -36,8 +36,8 @@
 <c:set value="${weathers.get(0)}" var="today"/>
 	<span>Today's Forecast: </span>
 	<img src="img/weather/${today.imageName}"/>
-	<span>High: ${today.highTemp}</span>
-	<span>Low: ${today.lowTemp}</span>
+	<span>High: ${today.highTemp} <c:if test="${celsius == 't'}"> °C</c:if><c:if test="${celsius != 't'}"> °F</c:if></span>
+	<span>Low: ${today.lowTemp}<c:if test="${celsius == 't'}"> °C</c:if><c:if test="${celsius != 't'}"> °F</c:if></span>
 	<c:if test="${today.getRecommendation().equals('')==false }">
 	<span>Recommendation(s): ${today.getRecommendation()}</span>
 	</c:if>
@@ -47,8 +47,8 @@
 	<c:if test="${weather.fiveDayForecastValue >1}">
 		<div>
 			<img src="img/weather/${weather.imageName}"/>
-			<span>High: ${weather.highTemp}</span>
-			<span>Low: ${weather.lowTemp}</span>
+			<span>High: ${weather.highTemp}<c:if test="${celsius == 't'}"> °C</c:if><c:if test="${celsius != 't'}"> °F</c:if></span>
+			<span>Low: ${weather.lowTemp}<c:if test="${celsius == 't'}"> °C</c:if><c:if test="${celsius != 't'}"> °F</c:if></span>
 			<br>
 		</div>
 	</c:if>
@@ -59,13 +59,13 @@
 <c:choose>
 <c:when test="${empty celsius or celsius == 'f'}">
 <input type="hidden" name="celsius" value="t">
-<button type="submit">Convert to Celsius</button>
+<button type="submit">Convert to °C</button>
 </c:when>
 <c:otherwise>
 <input type="hidden" name="celsius" value="f">
-<button type="submit">Convert to Fahrenheit</button>
+<button type="submit">Convert to °F</button>
 </c:otherwise>
 </c:choose>
 </form>
 <c:import url="/WEB-INF/jsp/common/footer.jsp" />
->>>>>>> ad8293ff15579ef2ab1cc0d8b05931738d8b7c70
+

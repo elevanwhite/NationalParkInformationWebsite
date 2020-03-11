@@ -34,6 +34,7 @@ public class ParkWeatherController {
 		Park park = parkDao.getParkByCode(code);
 		List<Weather> parkWeather= parkDao.getAllWeatherByPark(code);
 		modelMap.put("park", park);
+		
 		if (celsius !=null) {
 			session.setAttribute("celsius", celsius);
 			if (celsius.equals("t")) {
@@ -41,6 +42,16 @@ public class ParkWeatherController {
 					w.convertToCelsius();
 				}
 			
+			}
+		} else {
+			try {
+				if (session.getAttribute("celsius").equals("t")) {
+					for (Weather w: parkWeather) {
+						w.convertToCelsius();
+					}
+				}
+			} catch (NullPointerException e) {
+				// Catch NullPointer
 			}
 		}
 		modelMap.put("weathers", parkWeather);

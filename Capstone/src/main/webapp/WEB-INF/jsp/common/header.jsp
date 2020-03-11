@@ -13,3 +13,9 @@
 </head>
 <body>
 	<header>Header</header>
+	<nav>
+		<c:url value="/" var="homeUrl"/>
+		<a href="${homeUrl}">Home</a>
+		<c:url value="/survey" var="surveyUrl"/>
+		<a href="${surveyUrl}">Survey</a>
+	</nav>

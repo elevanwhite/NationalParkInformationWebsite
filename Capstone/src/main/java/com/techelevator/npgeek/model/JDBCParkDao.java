@@ -39,6 +39,19 @@ public class JDBCParkDao implements ParkDao{
 		return allParks;
 	}
 	@Override
+	public List<String> getAllParkCodes() {
+		List<String> codes = new ArrayList<>();
+		String sql = "SELECT parkcode FROM park ORDER BY parkname;";
+		
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+		while(results.next()) {
+			String currentCode = results.getString("parkcode");
+			codes.add(currentCode);
+		}
+		
+		return codes;
+	}
+	@Override
 	public Park getParkByCode(String code) {
 		Park park = new Park();
 		String sql = "SELECT parkname, state, acreage, elevationinfeet, milesoftrail, numberofcampsites, climate, yearfounded, " +
@@ -80,8 +93,14 @@ public class JDBCParkDao implements ParkDao{
 			currentWeather.setForecast(results.getString("forecast"));
 			allWeather.add(currentWeather);
 		}
-	return allWeather;
+		return allWeather;
+	}
 	
+	@Override
+	public void submitSurvey(Survey survey) {
+		String sql = "INSERT INTO survey_result (parkcode, emailaddress, state, activitylevel) "+
+					 "VALUES (?, ?, ?, ?);";
+		jdbcTemplate.update(sql, survey.getFavPark(), survey.getEmail(), survey.getStateRes(), survey.getActivityLvl());
 	}
 	
 
