@@ -10,7 +10,4 @@
 		<span>${park.inspirationalQuote}</span>
 		<span>${park.inspQuoteSource}</span>
 	</div>
-	<table>
-	</table>
-
 <c:import url="/WEB-INF/jsp/common/footer.jsp"/>
