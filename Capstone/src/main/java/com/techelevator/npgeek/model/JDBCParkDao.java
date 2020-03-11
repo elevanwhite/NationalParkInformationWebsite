@@ -38,7 +38,6 @@ public class JDBCParkDao implements ParkDao{
 		
 		return allParks;
 	}
-
 	@Override
 	public Park getParkByCode(String code) {
 		Park park = new Park();
@@ -53,11 +52,11 @@ public class JDBCParkDao implements ParkDao{
 			park.setState(results.getString("state"));
 			park.setAcreage(results.getInt("acreage"));
 			park.setElevationInFeet(results.getInt("elevationinfeet"));
-			park.setMilesOfTrails(results.getDouble("milesoftrail"));
+			park.setMilesOfTrail(results.getFloat("milesoftrail"));
 			park.setNumberOfCampsites(results.getInt("numberofcampsites"));
 			park.setClimate(results.getString("climate"));
 			park.setYearFounded(results.getInt("yearfounded"));
-			park.setAnnualVistors(results.getInt("annualvisitorcount"));
+			park.setAnnualVisitors(results.getInt("annualvisitorcount"));
 			park.setInspirationalQuote(results.getString("inspirationalquote"));
 			park.setInspQuoteSource(results.getString("inspirationalquotesource"));
 			park.setDescription(results.getString("parkdescription"));
@@ -67,5 +66,23 @@ public class JDBCParkDao implements ParkDao{
 		
 		return park;
 	}
+	@Override
+	public List<Weather> getAllWeatherByPark(String code) {
+		List<Weather> allWeather = new ArrayList<>();
+		String sql= "SELECT fivedayforecastvalue, low, high, forecast FROM weather WHERE parkcode = ?;";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, code);
+		while (results.next()) {
+			Weather currentWeather = new Weather();
+			currentWeather.setParkCode(code);
+			currentWeather.setFiveDayForecastValue(results.getInt("fivedayforecastvalue"));
+			currentWeather.setLowTemp(results.getInt("low"));
+			currentWeather.setHighTemp(results.getInt("high"));
+			currentWeather.setForecast(results.getString("forecast"));
+			allWeather.add(currentWeather);
+		}
+	return allWeather;
+	
+	}
+	
 
 }
