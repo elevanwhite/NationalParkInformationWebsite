@@ -3,11 +3,14 @@
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 
 <c:forEach items="${parks}" var="park">
-	<div>
-		<a href="<c:url value="/detail?code=${park.parkCode}"/>"><img src="img/parks/${park.imageName}"/></a>
-		<div>
-			<span>${park.parkName}</span>
+	<div class="parkOverview">
+	<div class="col-4">
+		<a href="<c:url value="/detail?code=${park.parkCode}"/>"><img class="parkImg" src="img/parks/${park.imageName}"/></a>
+		</div>
+		<div class="col-8">
+			<h3>${park.parkName}</h3>
 			<span>${park.description}</span>
+			
 		</div>
 	</div>
 </c:forEach>

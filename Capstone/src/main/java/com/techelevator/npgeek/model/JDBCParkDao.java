@@ -1,7 +1,10 @@
 package com.techelevator.npgeek.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -103,5 +106,15 @@ public class JDBCParkDao implements ParkDao{
 		jdbcTemplate.update(sql, survey.getFavPark(), survey.getEmail(), survey.getStateRes(), survey.getActivityLvl());
 	}
 	
+	@Override
+	public Map<Park, Integer> getSurveyResults(){
+		Map <Park, Integer> resultsMap = new LinkedHashMap<>();
+		String sql = "SELECT COUNT(parkcode) AS parkCount, parkcode  FROM survey_result GROUP BY parkcode ORDER BY parkCount DESC, parkcode;";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+		while (results.next()) {
+			Park currentPark = getParkByCode(results.getString("parkcode"));
+			resultsMap.put(currentPark, results.getInt("parkCount"));
+		} return resultsMap;
+	}
 
 }

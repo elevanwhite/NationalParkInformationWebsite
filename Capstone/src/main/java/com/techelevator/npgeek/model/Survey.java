@@ -11,11 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class Survey {
 	
-	@NotBlank
-	@Email(message="Invalid Park Code")
+	@NotBlank (message="Please enter a valid email.")
+	@Email(message="Invalid Email")
 	private String email;
 	
-	@NotBlank
+	@NotBlank (message="Please select a park.")
 	private String favPark;
 	
 	@AssertTrue(message="Invalid Park Code")
@@ -34,9 +34,9 @@ public class Survey {
 		return parkCodes.contains(favPark);
 	}
 	
-	@NotBlank
+	@NotBlank (message="Please select your state of residence.")
 	private String stateRes;
-	@AssertTrue
+	@AssertTrue (message="Please select a valid state.")
 	public boolean isValidState() {
 		States[] states = States.values();
 		for (States s : states) {
@@ -47,9 +47,9 @@ public class Survey {
 		return false;
 	}
 	
-	@NotBlank
+	@NotBlank (message="Please select an activity level.")
 	private String activityLvl;
-	@AssertTrue
+	@AssertTrue (message="Please select a valid activity level.")
 	public boolean isValidActivityLevel() {
 		List<String> levels = new ArrayList<>();
 		levels.add("inactive");

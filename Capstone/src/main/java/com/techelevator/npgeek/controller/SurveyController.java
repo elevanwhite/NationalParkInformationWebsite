@@ -1,6 +1,7 @@
 package com.techelevator.npgeek.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -51,7 +52,10 @@ public class SurveyController {
 	}
 	
 	@GetMapping("/survey/results")
-	public String displaySurveyResults() {
+	public String displaySurveyResults(ModelMap modelMap) {
+		Map<Park, Integer> parkResults = parkDao.getSurveyResults();
+		
+		modelMap.put("parkResults", parkResults);
 		return "surveyResults";
 	}
 }
