@@ -1,5 +1,5 @@
 nav {
-	background: ghostwhite;
+	background: honeydew;
 	height: 100px;
 	border-bottom: 2px solid grey;
 }
@@ -10,24 +10,28 @@ nav {
 	justify-content: space-around;
 }
 
-
 #navImg {
 	width:40%;
 	height: auto;
 }
 body {
-	background: white;
+	background-image: url("../img/topo3.png");
+	 background-size: 500px;
+	 background-attachment: fixed;
+	 
 }
 
 .parkOverview {
 	display: flex;
 	padding: 10px;
 	align-items: center;
-	background: ghostwhite;
 	flex-direction: column;
 	
 }
  
+ .btn-outline-primary {
+ background: white;
+ }
 .parkImg {
 	border-radius: 10px;
 	width: 100%;
@@ -36,8 +40,8 @@ body {
 }
 .nameAndDesc {
 	width: 100%;
-	background: white;
 	border-radius: 10px;
+	background: white;
 	padding: 10px;
 	border: 2px solid grey;
 	font-size: .5em;
@@ -129,6 +133,11 @@ form {
 .leaderCard {
 	border: 5px solid gold;
 }
+.errors {
+	color: crimson;
+	font-weight: bold;
+	
+}
 @media only screen and (min-width: 768px){
 	#navImg {
 	width:35%;
@@ -172,4 +181,8 @@ height: 300px;
 #todayWeather img {
 	width:60%;
 }
+}
+@media only screen and (min-width: 1600px){
+#navImg {
+	width:20%;
 }

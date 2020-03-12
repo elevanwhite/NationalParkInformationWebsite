@@ -65,7 +65,6 @@
 	</c:if>
 	</div>
 </div>
-<hr>
 <div class="weatherDiv">
 <c:forEach var="weather" items="${weathers}">
 	<c:if test="${weather.fiveDayForecastValue >1}">

@@ -16,8 +16,9 @@
 </head>
 <nav>
 	<div id="navDiv">
-		<img id="navImg" src="img/logo.png"/>
 		<c:url value="/" var="homeUrl"/>
+	
+		<img id="navImg" src="img/logo.png"/>
 		<a class="btn btn-primary" href="${homeUrl}">Home</a>
 		<c:url value="/survey" var="surveyUrl"/>
 		<a class="btn btn-primary" href="${surveyUrl}">Survey</a>
