@@ -2,6 +2,8 @@ package com.techelevator.npgeek.controller;
 
 
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -34,7 +36,10 @@ public class ParkWeatherController {
 		Park park = parkDao.getParkByCode(code);
 		List<Weather> parkWeather= parkDao.getAllWeatherByPark(code);
 		modelMap.put("park", park);
-		
+		String month = LocalDate.now().getMonth().toString();
+		int day = LocalDate.now().getDayOfMonth();
+		modelMap.put("month", month);
+		modelMap.put("day", day);
 		if (celsius !=null) {
 			session.setAttribute("celsius", celsius);
 			if (celsius.equals("t")) {

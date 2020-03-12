@@ -48,10 +48,10 @@ public class SurveyController {
 			return "redirect:/survey";
 		}
 		parkDao.submitSurvey(survey);
-		return "redirect:/survey/results";
+		return "redirect:/surveyresults";
 	}
 	
-	@GetMapping("/survey/results")
+	@GetMapping("/surveyresults")
 	public String displaySurveyResults(ModelMap modelMap) {
 		Map<Park, Integer> parkResults = parkDao.getSurveyResults();
 		

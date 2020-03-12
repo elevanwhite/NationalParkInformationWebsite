@@ -111,8 +111,13 @@ public class JDBCParkDao implements ParkDao{
 		Map <Park, Integer> resultsMap = new LinkedHashMap<>();
 		String sql = "SELECT COUNT(parkcode) AS parkCount, parkcode  FROM survey_result GROUP BY parkcode ORDER BY parkCount DESC, parkcode;";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+		boolean isFirst = true;
 		while (results.next()) {
 			Park currentPark = getParkByCode(results.getString("parkcode"));
+			if (isFirst) {
+				currentPark.setLeader(true);
+				isFirst = false;
+			}
 			resultsMap.put(currentPark, results.getInt("parkCount"));
 		} return resultsMap;
 	}

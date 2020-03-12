@@ -11,6 +11,7 @@ private int lowTemp;
 private int highTemp;
 private String forecast;
 private String imageName;
+private boolean isCelsius = false;;
 
 
 @SuppressWarnings("serial")
@@ -84,15 +85,27 @@ public String getRecommendation() {
 	} else 	if(forecast.equals("thunderstorms")) {
 		result += RECOMMENDATIONS.get("thunderstorms");
 	}
-	
-	if (highTemp >75) {
-		result += RECOMMENDATIONS.get("hot");
-	} else if (lowTemp <20){
-		result += RECOMMENDATIONS.get("low");
-	}
-	
-	if (highTemp - lowTemp > 20) {
-		result += RECOMMENDATIONS.get("tempChange");
+	if (isCelsius == false) {
+		if (highTemp >75) {
+			result += RECOMMENDATIONS.get("hot");
+		} else if (lowTemp <20){
+			result += RECOMMENDATIONS.get("low");
+		}
+		
+		if (highTemp - lowTemp > 20) {
+			result += RECOMMENDATIONS.get("tempChange");
+		}
+	} else {
+		double multiplier = .55;
+		if (highTemp > 24) {
+			result += RECOMMENDATIONS.get("hot");
+		} else if (lowTemp < -6){
+			result += RECOMMENDATIONS.get("low");
+		}
+		
+		if (highTemp - lowTemp > 11) {
+			result += RECOMMENDATIONS.get("tempChange");
+		}
 	}
 	return result;	
 }
@@ -102,6 +115,7 @@ public void convertToCelsius() {
 	lowTemp = (int)convertedTemp;
 	convertedTemp = (highTemp -32) *multiplier;
 	highTemp =(int)convertedTemp;
+	isCelsius = true;
 }
 
 

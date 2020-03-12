@@ -18,8 +18,9 @@ public class Park {
 	private String description;
 	private int entryFee;
 	private int numberOfAnimalSpecies;
+	private boolean isLeader = false;
 	
-// Getters And Setters
+	// Getters And Setters
 	public String getParkCode() {
 		return parkCode;
 	}
@@ -114,5 +115,10 @@ public class Park {
 	public void setNumberOfAnimalSpecies(int numberOfAnimalSpecies) {
 		this.numberOfAnimalSpecies = numberOfAnimalSpecies;
 	}
-	
+	public boolean isLeader() {
+		return isLeader;
+	}
+	public void setLeader(boolean isLeader) {
+		this.isLeader = isLeader;
+	}
 }
