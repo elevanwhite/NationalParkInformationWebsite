@@ -1,10 +1,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 
 <c:import url="/WEB-INF/jsp/common/header.jsp" />
 <img class="detailImg" src="img/parks/${park.imageName}"/>
 <br>
 <div class="detailDesc">
-	<h1>${park.parkName}</h1> 
+	<h3>${park.parkName}</h3> 
 	<br>
 	<span>${park.description}</span>
 	<br>
@@ -26,40 +28,42 @@
 	</tr>
 </table>
 <div class="detailDesc">
-	<span>${park.parkName} features ${park.milesOfTrail} miles of
-		trail and boasts ${park.numberOfCampsites} unique camp sites. It was
+
+	<span>${park.parkName} features 
+	<fmt:formatNumber type="number" maxFractionDigits="2" value="${park.milesOfTrail}" />
+ 		miles of trail and boasts ${park.numberOfCampsites} unique camp sites. It was
 		founded in ${park.yearFounded} and received ${park.annualVisitors}
 		visitors in the previous year. Come visit this amazing park for only
 		$${park.entryFee}. </span>
 		<br>
 </div>
 <div class="detailDesc">
-	<span>"${park.inspirationalQuote}"</span>
+	<em>"${park.inspirationalQuote}"</em>
 	<br>
-	<span>- ${park.inspQuoteSource}</span>
+	<em>- ${park.inspQuoteSource}</em>
 </div>
 <c:set value="${weathers.get(0)}" var="today"/>
 	<div class="weatherHeader">
-		<h2>Five Day Forecast:</h2>
+		<h4>Five Day Forecast:</h4>
 		<span>${month} ${day}</span>
 	</div>
 <div id="todayWeather">
+<div class="col-4">
 	<img src="img/weather/${today.imageName}"/>
-	<div>
-		<h3>High: ${today.highTemp} 
+</div >
+	<div class="col-8">
+		<strong>High: ${today.highTemp} 
 			<c:if test="${celsius == 't'}"> °C</c:if><c:if test="${celsius != 't'}"> °F</c:if>
-		</h3>
-		<h3>Low: ${today.lowTemp}
+		</strong>
+		<strong>Low: ${today.lowTemp}
 			<c:if test="${celsius == 't'}"> °C</c:if><c:if test="${celsius != 't'}"> °F</c:if>
-		</h3>
-	</div>
-	
+		</strong>
+		<br>
 	<c:if test="${not empty today.getRecommendation()}">
-	<div>
-		<h5>Recommendation(s):</h5> 
-		<span>${today.getRecommendation()}</span>
-	</div>
+		<strong>Recommendation(s):</strong> 
+		<p>${today.getRecommendation()}</p>
 	</c:if>
+	</div>
 </div>
 <hr>
 <div class="weatherDiv">

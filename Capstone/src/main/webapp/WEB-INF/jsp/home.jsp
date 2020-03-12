@@ -4,11 +4,13 @@
 
 <c:forEach items="${parks}" var="park">
 	<div class="parkOverview">
-		<div class="col-4">
+		<div class="col" >
+		<a href="<c:url value="/detail?code=${park.parkCode}"/>">
 			<img class="parkImg" src="img/parks/${park.imageName}"/>
+			</a>
 		</div>
-		<div class="col-8 nameAndDesc">
-			<h3><a href="<c:url value="/detail?code=${park.parkCode}"/>">${park.parkName}</a></h3>
+		<div class="col nameAndDesc">
+			<h4><a href="<c:url value="/detail?code=${park.parkCode}"/>">${park.parkName}</a></h4>
 			<span>${park.description}</span>
 			
 		</div>
