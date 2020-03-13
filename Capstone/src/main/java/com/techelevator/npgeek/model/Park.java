@@ -19,6 +19,7 @@ public class Park {
 	private int entryFee;
 	private int numberOfAnimalSpecies;
 	private boolean isLeader = false;
+	private String location;
 	
 	// Getters And Setters
 	public String getParkCode() {
@@ -120,5 +121,11 @@ public class Park {
 	}
 	public void setLeader(boolean isLeader) {
 		this.isLeader = isLeader;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
 	}
 }

@@ -17,12 +17,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.techelevator.npgeek.model.Park;
 import com.techelevator.npgeek.model.ParkDao;
 import com.techelevator.npgeek.model.Weather;
+import com.techelevator.npgeek.model.WeatherDao;
 
 @Controller
 public class ParkWeatherController {
 	
 	@Autowired
 	private ParkDao parkDao;
+	@Autowired
+	private WeatherDao weatherDao;
 	
 	@GetMapping("/")
 	public String displayHomePage(ModelMap modelMap) {
@@ -33,20 +36,23 @@ public class ParkWeatherController {
 	
 	@GetMapping("/detail")
 	public String displayDetailPage(@RequestParam String code, @RequestParam(required = false) String celsius, ModelMap modelMap, HttpSession session) {
+// Park to be displayed
 		Park park = parkDao.getParkByCode(code);
-		List<Weather> parkWeather= parkDao.getAllWeatherByPark(code);
 		modelMap.put("park", park);
+// Current Date to reference
 		String month = LocalDate.now().getMonth().toString();
 		int day = LocalDate.now().getDayOfMonth();
 		modelMap.put("month", month);
 		modelMap.put("day", day);
+// MultiDay Forecast from Dark Sky API
+		List<Weather> parkWeather = weatherDao.getForecastByLocaiton(park.getLocation());
+// Celsius Check
 		if (celsius !=null) {
 			session.setAttribute("celsius", celsius);
 			if (celsius.equals("t")) {
 				for (Weather w: parkWeather) {
 					w.convertToCelsius();
 				}
-			
 			}
 		} else {
 			try {

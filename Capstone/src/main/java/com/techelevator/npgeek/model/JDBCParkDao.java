@@ -58,7 +58,8 @@ public class JDBCParkDao implements ParkDao{
 	public Park getParkByCode(String code) {
 		Park park = new Park();
 		String sql = "SELECT parkname, state, acreage, elevationinfeet, milesoftrail, numberofcampsites, climate, yearfounded, " +
-					 "annualvisitorcount, inspirationalquote, inspirationalquotesource, parkdescription, entryfee, numberofanimalspecies " +
+					 "annualvisitorcount, inspirationalquote, inspirationalquotesource, parkdescription, entryfee, numberofanimalspecies, " +
+					 "location " +
 					 "FROM park WHERE parkcode = ?;";
 		
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, code);
@@ -78,26 +79,28 @@ public class JDBCParkDao implements ParkDao{
 			park.setDescription(results.getString("parkdescription"));
 			park.setEntryFee(results.getInt("entryfee"));
 			park.setNumberOfAnimalSpecies(results.getInt("numberofanimalspecies"));
+			park.setLocation(results.getString("location"));
 		}
 		
 		return park;
 	}
-	@Override
-	public List<Weather> getAllWeatherByPark(String code) {
-		List<Weather> allWeather = new ArrayList<>();
-		String sql= "SELECT fivedayforecastvalue, low, high, forecast FROM weather WHERE parkcode = ?;";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, code);
-		while (results.next()) {
-			Weather currentWeather = new Weather();
-			currentWeather.setParkCode(code);
-			currentWeather.setFiveDayForecastValue(results.getInt("fivedayforecastvalue"));
-			currentWeather.setLowTemp(results.getInt("low"));
-			currentWeather.setHighTemp(results.getInt("high"));
-			currentWeather.setForecast(results.getString("forecast"));
-			allWeather.add(currentWeather);
-		}
-		return allWeather;
-	}
+//NO LONGER USED, DUE TO CONNECTED API
+//	@Override
+//	public List<Weather> getAllWeatherByPark(String code) {
+//		List<Weather> allWeather = new ArrayList<>();
+//		String sql= "SELECT fivedayforecastvalue, low, high, forecast FROM weather WHERE parkcode = ?;";
+//		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, code);
+//		while (results.next()) {
+//			Weather currentWeather = new Weather();
+//			currentWeather.setParkCode(code);
+//			currentWeather.setFiveDayForecastValue(results.getInt("fivedayforecastvalue"));
+//			currentWeather.setLowTemp(results.getInt("low"));
+//			currentWeather.setHighTemp(results.getInt("high"));
+//			currentWeather.setForecast(results.getString("forecast"));
+//			allWeather.add(currentWeather);
+//		}
+//		return allWeather;
+//	}
 	
 	@Override
 	public void submitSurvey(Survey survey) {

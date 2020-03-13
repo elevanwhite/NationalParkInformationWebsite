@@ -45,17 +45,18 @@
 <c:set value="${weathers.get(0)}" var="today"/>
 	<div class="weatherHeader">
 		<h4>Five Day Forecast:</h4>
-		<span>${month} ${day}</span>
+		<span>${today.month} ${today.day}</span>
 	</div>
 <div id="todayWeather">
 <div class="col-4">
-	<img src="img/weather/${today.imageName}"/>
+	<img src="img/weather/${today.imageName}" alt="${today.icon}"/>
+	
 </div >
 	<div class="col-8">
-		<strong>High: ${today.highTemp} 
+		<strong>High: <fmt:formatNumber type="number" maxFractionDigits="0" value="${today.highTemp}" /> 
 			<c:if test="${celsius == 't'}"> °C</c:if><c:if test="${celsius != 't'}"> °F</c:if>
 		</strong>
-		<strong>Low: ${today.lowTemp}
+		<strong>Low: <fmt:formatNumber type="number" maxFractionDigits="0" value="${today.lowTemp}" /> 
 			<c:if test="${celsius == 't'}"> °C</c:if><c:if test="${celsius != 't'}"> °F</c:if>
 		</strong>
 		<br>
@@ -67,12 +68,12 @@
 </div>
 <div class="weatherDiv">
 <c:forEach var="weather" items="${weathers}">
-	<c:if test="${weather.fiveDayForecastValue >1}">
+	<c:if test="${weather.fiveDayForecastValue > 1 && weather.fiveDayForecastValue < 6}">
 		<div>
-			<span>${month} ${day + weather.fiveDayForecastValue - 1}</span>
-			<img src="img/weather/${weather.imageName}"/>
-			<span>High: ${weather.highTemp}<c:if test="${celsius == 't'}"> °C</c:if><c:if test="${celsius != 't'}"> °F</c:if></span>
-			<span>Low: ${weather.lowTemp}<c:if test="${celsius == 't'}"> °C</c:if><c:if test="${celsius != 't'}"> °F</c:if></span>
+			<span>${weather.month} ${weather.day}</span>
+			<img src="img/weather/${weather.imageName}" alt="${weather.icon}"/>
+			<span>High: <fmt:formatNumber type="number" maxFractionDigits="0" value="${weather.highTemp}" /> <c:if test="${celsius == 't'}"> °C</c:if><c:if test="${celsius != 't'}"> °F</c:if></span>
+			<span>Low: <fmt:formatNumber type="number" maxFractionDigits="0" value="${weather.lowTemp}" /> <c:if test="${celsius == 't'}"> °C</c:if><c:if test="${celsius != 't'}"> °F</c:if></span>
 			<br>
 		</div>
 	</c:if>
