@@ -84,23 +84,6 @@ public class JDBCParkDao implements ParkDao{
 		
 		return park;
 	}
-//NO LONGER USED, DUE TO CONNECTED API
-//	@Override
-//	public List<Weather> getAllWeatherByPark(String code) {
-//		List<Weather> allWeather = new ArrayList<>();
-//		String sql= "SELECT fivedayforecastvalue, low, high, forecast FROM weather WHERE parkcode = ?;";
-//		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, code);
-//		while (results.next()) {
-//			Weather currentWeather = new Weather();
-//			currentWeather.setParkCode(code);
-//			currentWeather.setFiveDayForecastValue(results.getInt("fivedayforecastvalue"));
-//			currentWeather.setLowTemp(results.getInt("low"));
-//			currentWeather.setHighTemp(results.getInt("high"));
-//			currentWeather.setForecast(results.getString("forecast"));
-//			allWeather.add(currentWeather);
-//		}
-//		return allWeather;
-//	}
 	
 	@Override
 	public void submitSurvey(Survey survey) {

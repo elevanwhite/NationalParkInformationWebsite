@@ -3,11 +3,8 @@ package com.techelevator.npgeek.controller;
 
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
-
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -51,14 +48,14 @@ public class ParkWeatherController {
 			session.setAttribute("celsius", celsius);
 			if (celsius.equals("t")) {
 				for (Weather w: parkWeather) {
-					w.convertToCelsius();
+					w.isCelsius();
 				}
 			}
 		} else {
-			try {
+			try { // pull out variable beforehand
 				if (session.getAttribute("celsius").equals("t")) {
 					for (Weather w: parkWeather) {
-						w.convertToCelsius();
+						w.isCelsius();
 					}
 				}
 			} catch (NullPointerException e) {

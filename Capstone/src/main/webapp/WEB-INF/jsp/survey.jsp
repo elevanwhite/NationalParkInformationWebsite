@@ -8,13 +8,12 @@
 	<div class="form-group">
 		<label for="favPark">Favorite National Park</label>
 		<form:select class="form-control form-control-lg" id="favPark" name="favPark" required="required" path="favPark">
-			<option value="blank"></option>
+			<form:option value=""></form:option>
 			<c:forEach items="${parks}" var="park">
-				<option value="${park.parkCode}">${park.parkName}</option>
+				<form:option value="${park.parkCode}">${park.parkName}</form:option>
 			</c:forEach>
 		</form:select>
-		<form:errors path="validPark" class="errors"/>
-		
+		<form:errors path="favPark" class="errors"/>
 	</div>
 	<div class="form-group">
 		<label for="email">Your Email</label>
@@ -24,31 +23,20 @@
 	<div class="form-group">	
 		<label for="stateRes">State of Residence</label>
 		<form:select class="form-control form-control-lg" id="stateRes" name="stateRes" required="required" path="stateRes">
-			<option value="blank"></option>
+			<form:option value=""></form:option>
 		<c:forEach items="${states}" var="state">
-				<option>${state}</option>
+				<form:option value="${state}">${state}</form:option>
 			</c:forEach>
 		</form:select>
 		<form:errors path="validState" class="errors"/>
 		
 	</div>
+	<c:forEach items="${levels}" var="level">
 	<div class="form-check">
-		<form:radiobutton class="form-check-input" id="inactive" name="activityLvl" value="inactive" path="activityLvl"/>
-		<label class="form-check-label" for="inactive">Inactive</label>
+		<form:radiobutton class="form-check-input" id="${level}" name="activityLvl" value="${level}" path="activityLvl"/>
+		<label class="form-check-label" for="${level}">${level}</label>
 	</div>
-	<div class="form-check">
-		<form:radiobutton class="form-check-input" id="sedentary" name="activityLvl" value="sedentary" path="activityLvl"/>
-		<label class="form-check-label" for="sedentary">Sedentary</label>
-	</div>
-	<div class="form-check">
-		<form:radiobutton class="form-check-input" id="active" name="activityLvl" value="active" path="activityLvl"/>
-		<label class="form-check-label" for="active">Active</label>
-	</div>
-	<div class="form-check">
-		<form:radiobutton class="form-check-input" id="extremelyActive" name="activityLvl" value="extremelyActive" path="activityLvl"/>
-		<label class="form-check-label" for="extremelyActive">Extremely Active</label>
-		<form:errors path="validActivityLevel" class="errors"/>
-	</div>
+	</c:forEach>
 	<br>
 	<button class="btn btn-outline-primary" type="submit">Submit</button>
 </form:form>

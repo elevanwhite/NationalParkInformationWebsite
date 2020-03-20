@@ -1,13 +1,13 @@
 package com.techelevator.npgeek.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class Survey {
 	
@@ -17,22 +17,6 @@ public class Survey {
 	
 	@NotBlank (message="Please select a park.")
 	private String favPark;
-	
-	@AssertTrue(message="Invalid Park Code")
-	public boolean isValidPark() {
-		List<String> parkCodes = new ArrayList<>();
-		parkCodes.add("CVNP");
-		parkCodes.add("ENP");
-		parkCodes.add("GCNP");
-		parkCodes.add("GNP");
-		parkCodes.add("GSMNP");
-		parkCodes.add("GTNP");
-		parkCodes.add("MRNP");
-		parkCodes.add("RMNP");
-		parkCodes.add("YNP");
-		parkCodes.add("YNP2");
-		return parkCodes.contains(favPark);
-	}
 	
 	@NotBlank (message="Please select your state of residence.")
 	private String stateRes;
@@ -51,14 +35,13 @@ public class Survey {
 	private String activityLvl;
 	@AssertTrue (message="Please select a valid activity level.")
 	public boolean isValidActivityLevel() {
-		List<String> levels = new ArrayList<>();
-		levels.add("inactive");
-		levels.add("sedentary");
-		levels.add("active");
-		levels.add("extremelyActive");
+		List<String> levels = Arrays.asList(ACTIVITY_LEVELS); //make a constant, for each to populate jsp
+		
 		
 		return levels.contains(activityLvl);
 	}
+
+	public final static String[] ACTIVITY_LEVELS = new String[] {"Inactive", "Sedentary", "Active", "Extremely Active"};
 // Getters & Setters
 	public String getEmail() {
 		return email;
@@ -84,5 +67,4 @@ public class Survey {
 	public void setActivityLvl(String activityLvl) {
 		this.activityLvl = activityLvl;
 	}
-	
 }

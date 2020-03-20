@@ -12,7 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.techelevator.npgeek.model.Park;
@@ -37,6 +37,7 @@ public class SurveyController {
 		modelMap.put("parks", allParks);
 		States[] states = States.values();
 		modelMap.put("states", states);
+		modelMap.put("levels", Survey.ACTIVITY_LEVELS);
 		return "survey";
 	}
 	
@@ -47,7 +48,10 @@ public class SurveyController {
 			ra.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX +"surveyData", result);
 			return "redirect:/survey";
 		}
-		parkDao.submitSurvey(survey);
+		List<String> parkCodes = parkDao.getAllParkCodes();
+		if (parkCodes.contains(survey.getFavPark())) {
+			parkDao.submitSurvey(survey);
+		}
 		return "redirect:/surveyresults";
 	}
 	

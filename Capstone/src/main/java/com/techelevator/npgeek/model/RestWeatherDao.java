@@ -1,5 +1,6 @@
 package com.techelevator.npgeek.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +28,7 @@ public class RestWeatherDao implements WeatherDao {
 	}
 // API Path + User specific key
 	private static final String BASE_URL = "https://api.darksky.net/forecast/";
-	private static final String USER_KEY = "939a9e0747fd4639234bf8e2ce1f3dc1";
+	private static final String USER_KEY = "939a9e0747fd4639234bf8e2ce1f3dc1"; //remove before github post
 	
 	private RestTemplate restTemplate = new RestTemplate();
 	
@@ -38,13 +39,14 @@ public class RestWeatherDao implements WeatherDao {
 		List<Weather> forecast = new ArrayList<>();
 		int dayCounter = 0;
 		for (DarkSkyDataPoint d : response.daily.data) {
-			dayCounter++;
 			Weather weather = new Weather();
-			weather.setFiveDayForecastValue(dayCounter);
 			weather.setHighTemp(d.temperatureHigh);
 			weather.setLowTemp(d.temperatureLow);
 			weather.setIcon(d.icon);
+			weather.setDate(LocalDate.now().plusDays(dayCounter));
 			forecast.add(weather);
+			dayCounter++;
+
 		}
 		return forecast;
 	}

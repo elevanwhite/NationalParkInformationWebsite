@@ -31,10 +31,10 @@
 
 	<span>${park.parkName} features 
 	<fmt:formatNumber type="number" maxFractionDigits="2" value="${park.milesOfTrail}" />
- 		miles of trail and boasts ${park.numberOfCampsites} unique camp sites. It was
+ 		miles of trail<c:if test="${park.numberOfCampsites > 0}"> and boasts ${park.numberOfCampsites} unique camp sites</c:if>. It was
 		founded in ${park.yearFounded} and received ${park.annualVisitors}
-		visitors in the previous year. Come visit this amazing park for only
-		$${park.entryFee}. </span>
+		visitors in the previous year.<c:if test="${park.entryFee > 0}"> Come visit this amazing park for only
+		$${park.entryFee}.</c:if></span>
 		<br>
 </div>
 <div class="detailDesc">
@@ -45,7 +45,7 @@
 <c:set value="${weathers.get(0)}" var="today"/>
 	<div class="weatherHeader">
 		<h4>Five Day Forecast:</h4>
-		<span>${today.month} ${today.day}</span>
+		<span>${today.date.getMonth()} ${today.date.getDayOfMonth()}</span>
 	</div>
 <div id="todayWeather">
 <div class="col-4">
@@ -55,7 +55,7 @@
 	<div class="col-8">
 		<strong>High: <fmt:formatNumber type="number" maxFractionDigits="0" value="${today.highTemp}" /> 
 			<c:if test="${celsius == 't'}"> °C</c:if><c:if test="${celsius != 't'}"> °F</c:if>
-		</strong>
+		</strong> 
 		<strong>Low: <fmt:formatNumber type="number" maxFractionDigits="0" value="${today.lowTemp}" /> 
 			<c:if test="${celsius == 't'}"> °C</c:if><c:if test="${celsius != 't'}"> °F</c:if>
 		</strong>
@@ -68,9 +68,9 @@
 </div>
 <div class="weatherDiv">
 <c:forEach var="weather" items="${weathers}">
-	<c:if test="${weather.fiveDayForecastValue > 1 && weather.fiveDayForecastValue < 6}">
+	<c:if test="${weathers.indexOf(weather) > 0 && weathers.indexOf(weather) < 5}">
 		<div>
-			<span>${weather.month} ${weather.day}</span>
+			<span>${weather.date.getMonth()} ${weather.date.getDayOfMonth()}</span>
 			<img src="img/weather/${weather.imageName}" alt="${weather.icon}"/>
 			<span>High: <fmt:formatNumber type="number" maxFractionDigits="0" value="${weather.highTemp}" /> <c:if test="${celsius == 't'}"> °C</c:if><c:if test="${celsius != 't'}"> °F</c:if></span>
 			<span>Low: <fmt:formatNumber type="number" maxFractionDigits="0" value="${weather.lowTemp}" /> <c:if test="${celsius == 't'}"> °C</c:if><c:if test="${celsius != 't'}"> °F</c:if></span>
